@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>SymBNB -{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="/css/app.css">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -14,8 +15,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ads_index') }}">Nos annonces</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">

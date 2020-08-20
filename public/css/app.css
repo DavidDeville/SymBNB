@@ -1,0 +1,19 @@
+div.container {
+    margin-top: 20px;
+}
+
+div.Ad-title {
+    padding: 2em;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.Ad-title h1, div.Ad-title p {
+    color: white;
+    text-shadow: 3px 3px rgba(0,0,0,0.5);
+}
+
+div.carousel-caption h5 {
+    color: white;
+    text-shadow: 3px 3px rgba(0,0,0,0.5);
+}
