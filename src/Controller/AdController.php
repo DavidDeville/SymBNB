@@ -34,22 +34,6 @@ class AdController extends AbstractController
     public function create() {
         $ad = new Ad();
 
-        /**$form = $this->createFormBuilder($ad)
-                    ->add('title')
-                    ->add('introduction')
-                    ->add('content')
-                    ->add('rooms')
-                    ->add('price')
-                    ->add('coverImage')
-                    ->add('save', SubmitType::class, [
-                        "label" => "Créer la nouvelle annonce",
-                        "attr" => [
-                            "class" => "btn btn-primary"
-                        ]
-                    ])
-                    ->getForm();
-        */
-
         $form = $this->createForm(AdType::class, $ad);
         
         return $this->render("ad/new.html.twig", [
