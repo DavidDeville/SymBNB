@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -133,6 +134,8 @@ class AccountController extends AbstractController
             // Check if old password is the current password
             if(!$encoder->isPasswordValid($user, $passwordUpdate->getOldPassword())) {
                 // Handle error
+                $form->get('oldPassword')
+                    ->addError(new FormError("Ancien mot de passe invalide"));
             } else {
                 $newPassword = $passwordUpdate->getNewPassword();
                 $hash = $encoder->encodePassword($user, $newPassword);
