@@ -37,3 +37,12 @@ div.carousel-caption h5 {
     max-width: 24px;
     max-height: 24px;
 }
+
+.booking_form {
+    background-color: #f7f7f9;
+    padding: 2rem;
+}
+
+.start-date {
+    background-color: white;
+}
