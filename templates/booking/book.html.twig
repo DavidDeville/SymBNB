@@ -2,6 +2,15 @@
 
 {% block title %}Réserver l'annonce {{ ad.title }} {% endblock %}
 
+{% block stylesheets %}
+
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.
+    0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" 
+    crossorigin="anonymous" />
+
+{% endblock %}
+
 {% block body %}
 
     <div class="container">
@@ -21,13 +30,13 @@
                     {{ form_row(form.endDate) }}
                 </div>
             </div>
+            <h4>Montant du séjour : <span id="amount">...</span> &#8364;</h4>
+            <span id="days">0</span> nuit(s) à {{ ad.price }}&#8364; / nuit
+
+            <h4 class="mt-3">Vous avez un commentaire ?</h4>
+            {{ form_row(form.comment) }}
         </div>
 
-        <h4>Montant du séjour : <span id="amount">...</span> &#8364;</h4>
-        <span id="days">0</span> nuit(s) à {{ ad.price }}&#8364; / nuit
-
-        <h2>Vous avez un commentaire ?</h2>
-        {{ form_row(form.comment) }}
 
         <h2>Vous avez terminé !</h2>
         <p>Vacances de rêves ? Hébergement pour le boulot ? Peu importe, on est avec vous !</p>
@@ -36,4 +45,52 @@
         {{ form_end(form) }}
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" 
+    integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" 
+    crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#booking_startDate, #booking_endDate').datepicker({
+                format: 'dd/mm/yyyy',
+                datesDisabled: [
+                    {% for day in ad.notAvailableDays %}
+                        "{{ day.format('d-m-Y') }}",
+                    {% endfor %}
+                ],
+                startDate: new Date()
+            });
+            $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
+        });
+
+        function calculateAmount() {
+            // Get dates
+            const endDate = new Date(
+                $('#booking_endDate')
+                    .val()
+                    .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+            );
+
+            const startDate = new Date(
+                $('#booking_startDate')
+                    .val()
+                    .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+            );
+
+            if(startDate && endDate && startDate < endDate) {
+                // Milliseconds contained in a single day
+                const DAY_TIME  = 24 * 60 * 60 * 1000;
+
+                const interval  = endDate.getTime() - startDate.getTime();
+                const days      = interval / DAY_TIME;
+                const amount    = days * {{ ad.price }};
+
+                $('#days').text(days);
+                $('#amount').text(amount.toLocaleString('fr-FR'));
+            }
+        }
+    </script>
 {% endblock %}

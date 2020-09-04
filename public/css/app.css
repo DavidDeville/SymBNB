@@ -46,3 +46,7 @@ div.carousel-caption h5 {
 .start-date {
     background-color: white;
 }
+
+.datepicker table tr td.disabled, .datapicker table tr td.disabled:hover {
+    color: firebrick !important;
+}
