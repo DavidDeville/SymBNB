@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AccountController extends AbstractController
 {
     /**
-     * Allow 
+     * Allow user to login
      * 
      * @Route("/login", name="account_login")
      * 
@@ -31,8 +31,6 @@ class AccountController extends AbstractController
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
-
-        dump($error);
 
         return $this->render('account/login.html.twig', [
             'hasError' => $error !== null,

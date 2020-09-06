@@ -1,5 +1,9 @@
+h1, h2, h3, h4, h5 {
+    text-transform: none !important;
+}
+
 strong {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 div.container {
@@ -15,6 +19,12 @@ div.Ad-title {
 div.Ad-title h1, div.Ad-title p {
     color: white;
     text-shadow: 3px 3px rgba(0,0,0,0.5);
+}
+
+div.Ad-title .btn {
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
 }
 
 div.carousel-caption h5 {
@@ -38,6 +48,11 @@ div.carousel-caption h5 {
     max-height: 24px;
 }
 
+.avatar-micro {
+    max-width: 24px;
+    max-height: 24px;
+}
+
 .booking_form {
     background-color: #f7f7f9;
     padding: 2rem;
@@ -49,4 +64,12 @@ div.carousel-caption h5 {
 
 .datepicker table tr td.disabled, .datapicker table tr td.disabled:hover {
     color: firebrick !important;
+}
+
+span.rating i {
+    color: goldenrod;
+}
+
+.alert a {
+    text-decoration: none;
 }
